@@ -1,0 +1,116 @@
+  pypilot autopilot user manual
+
+  Date 7/16/2024
+
+  table of contents
+
+  Introduction
+     motivation
+
+     philisophy
+
+  Hardware and Install:
+     mounting instructions
+        suggested location computer, motor controller control interface various boats
+        location requirements
+           typical distances
+     electrical connections overview
+         data
+         power
+         rudder feedback
+         end travel switch
+         clutch
+         temperature sensor
+     maintainance
+       check screw terminals over time for losening
+     mechanical instructions
+       suggested drive types
+       speed of movement
+       clutch/emergency disengage
+       range of travel  holding course vs tacking, boat type etc
+       diagrams etc
+     remote controls
+       433mhz, range intended use
+       wifi based
+       IR
+
+   Software and Usage
+     initial powerup
+       boot splash indicating version
+       leds on motor controller
+       power off
+     control interfaces
+       lcd menu interface
+       pypilot OpenCPN plugin
+         installing into opencpn, interfacing with connections
+       python scripts
+       web interface
+           touch/hold  settings configuration,  day/night mode, language
+     configuring wireless
+           can revert to ap mode using lcd menu interface
+           note ap/client reportedly unreliable in ap (useful as backup)
+           how to find, pypilot.io  discover mdns,  nmap, check router etc
+     programming remote controls
+          each remote function
+     calibration instructions
+          accelerometer
+             explaining bias
+          leveling
+             alignment explain axes, and compass offset
+          compass
+             ...
+          rudder
+             explain non-linearity, ranges and o forth
+
+      configuring parameters
+          max current
+         tuning gains  -- explanation with sensible default
+         profiles
+         additional settings
+      operation
+         engage/disengage
+         modes
+           compass
+           gps
+           nav
+           wind
+           true wind
+         tacking
+         pilots
+      supported data formats
+         nmea0183
+            supported sentences
+            configuring with opencpn, or other applications, as client host
+         signalk
+            supported paths
+            configuring signalk-server
+      advanced usage
+         remote mode
+         ssh access
+           -- editing pypilot.conf
+         viewing log files
+         logging data
+         pypilot client
+         pypilot scope
+         rebuilding software
+         enabling additional/custom alternate pilot algorithms
+      upgrading software
+         via wifi/ssh
+         sd card imaging
+
+   Technical and Support
+      design decisions
+          type of sensors
+          software choices
+      mechanical dimensions
+          pypilot computer, screen size etc
+          motor controllers with/without enclosures
+          rudder feedback
+      technical specifications
+          power consumption
+          fuses
+          voltage ranges
+      additional support
+         reporting issues on github
+         openmarine forum, bugs/feature requests
+         contact author
