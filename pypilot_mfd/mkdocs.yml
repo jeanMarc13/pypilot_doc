@@ -4,6 +4,6 @@ repo_url: https://github.com/pypilot/pypilot_doc
 copyright: GPLv3
 
 plugins:
-  - with-pdf
+  - with-pdf:
       output_path: pdf/pypilot_mfd_user_manual.pdf
-      cover_subtitle: Official pypilot_mfd User Manual
+      cover_subtitle: Official pypilot MFD User Manual

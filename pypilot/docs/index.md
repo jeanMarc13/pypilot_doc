@@ -71,7 +71,7 @@ Typically the clutch outputs full power for 200-300ms, then reduces to a PWM sig
 
 ### Rudder Feedback
 
-<picture of rudder feedback>
+![rudder feedback](img/rudder_feedback.jpg)
 
 First of all, the rudder feedback is optional.   It can be disconnected while underway and pypilot will continue to steer.   It is generally used to avoid relying on stall detection and to report the rudder angle on a display.   It also may be used by certain pilot algorithms to enhance steering, but the basic pilot algorithm does not require it.  To be clear, corrections needed in moderate conditions are 10 or more times that of the errors due to integration from not knowing the rudder position, so the potential improvement in steering performance from rudder feedback is not huge.
 
@@ -97,7 +97,7 @@ The end of travel switches prevent further movement in each direction when close
 
 ### Temperature Sensor
 
-<picture of temperature sensor>
+![temp sensor](img/temp_sensor.jpg)
 
 The motor controllers all include onboard temperature sensors, but it is also possible to monitor the temperature of the motor or pump.  To do this attach a 10k NTC sensor to the pins labeled "Motor Temp".   The temperature limit can be configured to protect the drive from overheating, but in practice the motor should never get anywhere near the typical setting of 60C.
 
@@ -111,19 +111,26 @@ Linear actuators used to move the rudder should be stored out of the weather whe
 
 ### Suggested drive types
 
+For more information on suggested drives see: [actuators](http://pypilot.org/actuators/)
+
 #### Tiller-steered boats
 
-<picture of tiller drive>
+
 
 A basic linear actuator is recommended.  This is a simple solution and easy to mount and remove.  Typically a tillerpilot pin is mounted on the tiller, either by drilling a hole in the tiller itself, or a small block of wood that is hose clamped or attached with lashings to the tiller.   The pin provides a ball-socket type connection to the linear actuator allowing slight rotation in both axes as it moves in and out.  The linear actuator should also be attached to the boat via a pin and bushing to allow slight rotation in both axes as it moves.  This is needed to minimize "play" in the system which will reduce reaction time and efficiency.
 
-<closeup of pin>  <closeup of bushing>
+![tillerpilot pin](img/tillerpilotpin.jpg)
 
-The linear actuator itself can be an existing tiller drive, or one of many available online for low prices, eg:  [gomotorworld](http://gomotorworld.com)   The speed, force and range will vary from boat to boat.    Usually a faster drive is better as it can correct sooner and keep a straighter course which means less overall movement and power consumption.   The force required really depends on the vessel, with unbalanced rudders with significant weather helm requiring many times more force than balanced rudders with balanced sails.
+![tiller bracket](img/tiller_bracket1.jpg)
+![tiller bracket](img/tiller_bracket2.jpg)
+![tiller bracket](img/tiller_bracket3.jpg)
+![tiller bracket](img/tiller_bracket4.jpg)
+
+The linear actuator itself can be an existing tiller drive, or a linear actuator.   The speed, force and range will vary from boat to boat.    Usually a faster drive is better as it can correct sooner and keep a straighter course which means less overall movement and power consumption.   The force required really depends on the vessel, with unbalanced rudders with significant weather helm requiring many times more force than balanced rudders with balanced sails.
 
 #### Wheel Steering
 
-<picture of wheel steering>
+![wheel steering](img/wheel_steering.jpg)
 
 For wheel steered boats it is possible to directly drive the steering wheel using a while drive system.   One example would be a 3d printed toothed pulley bolted to the spokes of the steering wheel driven by  a windshield wiper motor.  The most difficult part of this arrangement is efficient engage and disengage ability to ensure you can easily take over steering again.  Another careful consideration is the alignment of the pulley on the wheel.   A slight misalignment can cause the pulley tension to change as well as skip teeth during rotation.
 
@@ -133,8 +140,8 @@ Another consideration is an electric car power steering motor.   These motors ar
 
 #### Hydraulic Steering
 
-<picture of hydraulic ram>
-<picture of bypass valve>
+![hydraulic ram](img/hydraulic_myth1.jpg)
+![hydraulic ram](img/hydraulic_myth2.jpg)
 
 There are a variety of different hydraulic schematics for different boats depending if there are one or more hydraulic steering wheels or if the wheel is cable driven.   Suffice to say, any type of hydraulic system can be used with pypilot provided an electric hydraulic pump can be used to move the rudder.   If unsure about what size pump, the larger one is recommended both for longevity (less heat) as well as speed of movement.  Having a more powerful pump may save power from faster corrections.
 
@@ -164,25 +171,27 @@ Typically +- 30 degrees of movement is desired for tacking, but only +- 15-20 de
 
 ### 433mhz wireless remotes
 
-The most common remote control used with pypilot is the 433mhz remote control.  These are commonly used for garage door openers and other applications.  This avoids interference with wifi and bluetooth, but importantly and delivers a consistent reliable signal with low-latency to control the pilot.   There are many low-cost remotes available online, however they do require psk encoding.
+The most common remote control used with pypilot is the 433mhz remote control.  These are commonly used for garage door openers and other applications.  This avoids interference with wifi and bluetooth, but importantly and delivers a consistent reliable signal with low-latency to control the pilot.   There are many low-cost 433mhz remotes (with psk encoding) available online but they are technically not fully waterproof, for example:
 
-<picture of white remote>
+![white remote](img/white_remote.jpg)
 
 There are a few remote controls designs specifically for pypilot that have some important improvements.  First they are fully potted or waterproof.  These designs have keypads intended for autopilot use with +10 +1 -1 -10 buttons.  They send alternating codes and buffer presses to allow rapid key presses without losing codes.  They send stop codes to ensure good timing for manual control.  They support pressing multiple keys (eg: tacking pressing +10 and +1) and can also switch channels to avoid interfering with nearby boats with pypilot (holding +10 and -10 buttons and selecting a channel)   Other remote controls can be much lower cost but do not include these features.
 
 #### 7 key control panel
 
-<picture>
+![control panel](img/control_panel.jpg)
+
 This control panel takes 12/24 volt power and provides standard +10 +1 -1 -10 keys.  The Auto key toggles the pilot enabled on or off.   The menu key enters the [lcd menu interface](#lcd-menu-interface).   The mode key changes to the next available mode.  Because of these functions, this keypad is intended to be mounted near the lcd display of the autopilot computer.   It is possible to reprogram the keys (eg: Auto to engage Menu to disengage) but the other control panel is more suitable for use when the screen is not visible
 
 #### 8 key control panel
 
-<picture>
+![control panel remote](img/control_panel_remote.jpg)
 This control panel also takes 12/24 volt power and provides the standard +10 +1 -1 -10 keys.  Rather than toggling enabled on/off it provides a standby button that always disengages the pilot.  The C, G, W buttons enable the pilot in Compass, GPS, and Wind modes.   Pressing C and G at the same time enters Nav mode, and G and W and the same time enters True Wind mode.
 
 #### 8 key remote panel
 
-<picture>
+![control remote](img/control_remote.jpg)
+
 This is identical in function to the 8 key control panel except rather than taking 12/24 volt power it uses 2xAA batteries making it simple to mount on the boat without running power to it.   The standby current is 4-6uA so typically the batteries should last for several years, but it is recommended to use alkaline batteries regardless.
 
 The remote controls can be configured using a web browser, see [`Configure LCD Keypad and Remotes`](#configure-lcd-keypad-and-remotes)
@@ -195,7 +204,7 @@ The user manual assumes the use of a separate raspberry pi for running pypilot u
 
 ### Boot Splash
 
-<picture of splash on running computer>
+![control remote](img/boot_screen.jpg)
 
 The initial splash screen is displayed 10-15 seconds after power up.   It indicates the version of pypilot and may be useful in debugging the system.
 
@@ -316,7 +325,8 @@ Below the gains, the [profile](#profiles) can be set.  profiles can also be adde
 ### calibration
 
 The calibration dialog can be used to visualize calibration of the autopilot
-<todo get screenshots>
+
+![pypilot plugin calibration](img/pypilot_plugin_calibration.png)
 
 ### settings
 
@@ -378,8 +388,7 @@ Check the fields to monitor, for example imu.gyro will plot the gyros axes.   It
 
 You can run the pypilot calibration by executing `pypilot_calibration` from the command line.
 
-<todo get screenshots>
-
+![pypilot calibration](img/pypilot_scripts_calibration.png)
 
 ## Web interface
 
@@ -500,6 +509,8 @@ Once calibrated pypilot is ready to use.
 
 ### Accelerometer Calibration
 
+![accel plot](img/accel_calibration_plot.png)
+
 Most recent pilots include the icm20948 sensors which are factory calibrated for accelerometer however many do still have small biases that can be compensated for.  It is not required to compensate for the small difference but it can improve the accuracy of the compass by at least a few degrees.   To calibrate the accelerometers they will have to be unmounted from the boat so then can be rotated in various orientations.   Typically tinypilot computers are shipped with the accelerometers already calibrated, but if you have re-imaged the SD card it is a good idea to perform this step.
 
 Ensure the accelerometer calibration is not locked, and carefully hold the sensors so that each of the 6 sides of the box is facing downward toward the earth in turn.  Once this is performed, every 30 seconds a calibration update may be attempted.  If there is sufficient difference the calibration parameters will be updated and reflected on the calibration display page, if not an output message in the calibration log should indicate the reason.
@@ -508,13 +519,18 @@ To calibrate the accelerometer bias, you must be on a “mostly” stable platfo
 
 Once a calibration is applied the accelerometer calibration age should reset. If it does not, repeat the process putting the sensors in different orientations until a calibration fix is found.
 
-### Leveling (Alignment)
+### Leveling and Alignment
+
+![level sensors](img/level_sensors.png)
+![boat plot](img/boat_plot.png)
 
 If the accelerometer are calibrated, the sensors can be fixed to the boat.   The level button should only be pressed when the boat is sitting level and not moving.  If it is pressed at the wrong time, you can always try again when the boat is sitting level.   A progress bar will indicate the period of time as the sensor readings are averaged for the alignment computation.  Once leveled, the pitch and roll readings should be nearly zero.   Leveling is essential to ensure the autopilot can read the correct heading.
 
 Correct alignment calibration must be performed before the compass calibration can begin.
 
 ### Compass Calibration
+
+![compass plot](img/accel_calibration_plot.png)
 
 Be sure to locate the sensors away from:
 
@@ -542,6 +558,8 @@ If metal objects are moved around the sensors, the compass must recalibrate.  Mo
 Once the compass is calibrated a heading offset can be entered depending on the orientation that the sensors are mounted in the boat.   Without this, the pilot can still hold a course, but the heading displayed will not match the actual course.   This corrects this offset as well as ensures the pitch and roll readings are correct.  For example if the heading offset is off by 90 degrees, the pitch and roll readings may be reversed.
 
 ### Rudder
+
+![rudder calibration](img/rudder_calibration.png)
 
 If a rudder feedback sensor is installed you can check the rudder calibration page to read the value and ensure it is working.   To calibrate the rudder, you must manually turn the helm to the port range, starboard range, and center and press each button for each position.   The order is not important, but once all 3 are completed the scale, offset and non-linearity should be computed.   The "rudder range" field should be manually set to indicate the true angle at each range position and to limit autopilot movement past this position.
 
@@ -875,8 +893,6 @@ The autopilot motor controller is kept separate from the computer for reliabilit
 
 ### motor controllers
 
-![pypilot web hat](img/pypilot_web_hat.png)
-
 Dimensions of printed circuit boards
 - pypilot motor controller 77x51mm
 - midpower motor controller 104x72mm
@@ -884,9 +900,25 @@ Dimensions of printed circuit boards
 
 ### motor controllers 3D printed enclosures
 
+The 3D printed enclosures are not waterproof.  Instead they prevent dust and contamination while allowing some airflow for cooling.   It is possible to mount the motor controllers in waterproof enclosures using glands for each power wire and a gland for the data cable, however the box should be slightly larger to dissipate heat, and the labor and cost involved should be considered.
+
+#### regular motor controller enclosure
+
+![controller_enclosure_a](img/controller_enclosure_a.png) ![controller_enclosure_b](img/controller_enclosure_b.png) ![controller_enclosure_c](img/controller_enclosure_c.png) ![controller_enclosure_d](img/controller_enclosure_d.png)
+
+#### mid power motor controller enclosure
+
+![midpower_controller_enclosure_a](img/midpower_controller_enclosure_a.png) ![midpower_controller_enclosure_b](img/midpower_controller_enclosure_b.png) ![midpower_controller_enclosure_c](img/midpower_controller_enclosure_c.png) ![midpower_controller_enclosure_d](img/midpower_controller_enclosure_d.png)
+
+#### high power motor controller enclosure
+
+![highpower_controller_enclosure_a](img/highpower_controller_enclosure_a.png) ![highpower_controller_enclosure_b](img/highpower_controller_enclosure_b.png) ![highpower_controller_enclosure_c](img/highpower_controller_enclosure_c.png) ![highpower_controller_enclosure_d](img/highpower_controller_enclosure_d.png)
+
+
 ### rudder feedback
 
-<picture of rudder feedback>
+![rudder feedback](img/rudder_feedback2.jpg)
+
 The rudder feedback unit consists of a 3d printed body which has delrin bushings.  A stainless shaft rotates through these bushings with a smooth fit.  The end of the shaft has a diametrically magnetized magnet which sits just above a potted angular hall sensor (mlx90316) ensuring the entire design is waterproof and has no potential to wear out over time.  Attached is a lever arm which should be mechanically actuated by the rudder.   Typically there is a ball socket on the end of the lever arm attached to the quadrant.  The longer the lever arm, the less play affects the rudder feedback.
 
 ## Technical Specifications
