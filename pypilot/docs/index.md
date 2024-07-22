@@ -115,8 +115,6 @@ For more information on suggested drives see: [actuators](http://pypilot.org/act
 
 #### Tiller-steered boats
 
-
-
 A basic linear actuator is recommended.  This is a simple solution and easy to mount and remove.  Typically a tillerpilot pin is mounted on the tiller, either by drilling a hole in the tiller itself, or a small block of wood that is hose clamped or attached with lashings to the tiller.   The pin provides a ball-socket type connection to the linear actuator allowing slight rotation in both axes as it moves in and out.  The linear actuator should also be attached to the boat via a pin and bushing to allow slight rotation in both axes as it moves.  This is needed to minimize "play" in the system which will reduce reaction time and efficiency.
 
 ![tillerpilot pin](img/tillerpilotpin.jpg)
