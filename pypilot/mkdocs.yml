@@ -4,6 +4,20 @@ repo_url: https://github.com/pypilot/pypilot_doc
 copyright: GPLv3
 
 plugins:
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - build: true
+          default: true
+          locale: en
+          name: English
+        - build: true
+          default: false
+          locale: fr
+          name: Français
+      reconfigure_material: true
+      reconfigure_search: true
   - search
   - git-revision-date-localized
   - with-pdf:
@@ -12,3 +26,4 @@ plugins:
       cover_subtitle: Official pypilot User Manual
       #      cover_logo: docs/img/favicon.png
       #      custom_template_path: cover_page.tpl
+
