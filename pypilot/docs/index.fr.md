@@ -10,7 +10,7 @@ Pypilot est un logiciel libre (GPLv3) et en tant que tel, vous pouvez lui faire 
 
 ## Philosophie des calculateurs, contrôleurs et équipements de la boutique pypilot
 
-Il est amusant de faire fonctionner pypilot sur un gros raspberry pi avec OpenPlotter et d’autres applications, mais cela présente quelques inconvénients comme une consommation électrique élevée, l’obligation d’arrêter proprement les applications pour ne pas corrompre la carte SD du raspberry pi et le risque de dysfonctionnement du pilote automatique à la suite de mises à jour d’applications Openplotter (SignalK). En conséquence, il est préférable de faire fonctionner pypilot sur un petit calculateur raspberry pi zero, réservé exclusivement au pilote automatique, avec une version logicielle stable. Le pilote peut alors être arrêté simplement en coupant l’alimentation électrique.
+Il est très instructif de faire fonctionner pypilot sur un gros raspberry pi avec OpenPlotter et d’autres applications, mais cela présente quelques inconvénients comme une consommation électrique élevée, l’obligation d’arrêter proprement les applications pour ne pas corrompre la carte SD du raspberry pi et le risque de dysfonctionnement du pilote automatique à la suite de mises à jour d’applications Openplotter (SignalK). En conséquence, il est préférable de faire fonctionner pypilot sur un petit calculateur raspberry pi zero, réservé exclusivement au pilote automatique, avec une version logicielle stable. Le pilote peut alors être arrêté simplement en coupant l’alimentation électrique.
 
 Il est amusant et instructif d’assembler des composants pour faire fonctionner Pypilot. Mais très peu d’entre nous sauront le faire fonctionner avec des télécommandes radio avec une grande fiabilité. Sur un pilote automatique de bateau, il faut aussi ajouter des composants, inutiles sur un montage de coin de table, mais indispensables pour assurer un fonctionnement stable dans le temps en apportant la robustesse indispensable aux chocs électromagnétiques (CEM).
 
@@ -25,7 +25,7 @@ Il suffit de simplement les connecter entre eux pour constituer un pilote automa
 
 ## Limitations de cette documentation
 
-Ce manuel d'utilisation suppose l'utilisation d'un Raspberry pi zéro exécutant exclusivement pypilot à l'aide du système tinypilot, à l’identique du calculateur pypilot de la boutique. Si vous exécutez pypilot sous Openplotter ou un autre système d'exploitation, sachez qu'une partie de cette documentation concerne uniquement la configuration tinypilot.
+Ce manuel d'utilisation suppose l'utilisation d'un Raspberry pi zéro exécutant exclusivement pypilot à l'aide du système tinypilot, à l’identique du calculateur pypilot de la boutique. Si vous exécutez pypilot sous Openplotter ou un autre système d'exploitation, sachez qu'une partie de cette documentation concerne uniquement la configuration tynipilot.
 
 # Matériel et installation
 
@@ -63,7 +63,7 @@ Ce clavier radio permet de contrôler directement pypilot avec l’afficheur LCD
 
 ## Vue d'ensemble des connexions électriques
 
-![pypilot diagram](img/pypilot_diagram.png)
+![pypilot diagram](img/pypilot_diagram1.png)
 
 ### Câble de données du contrôleur moteur
 
@@ -105,7 +105,7 @@ Le contrôleur du moteur a besoin d'une alimentation électrique avec des câble
 
 Un port USB est disponible pour une utilisation optionnelle. Il permet d’y connecter un GPS USB ou un autre capteur tel qu’une girouette. La boutique propose un convertisseur USB vers NMEA avec isolation galvanique pour s'interfacer avec les capteurs NMEA0183 ou le pypilot_mfd. Il est également courant de ne pas utiliser le port USB ou de l'envisager pour une utilisation future.
 
-### Sortie d'embrayage (cluth)
+### Sortie d'embrayage (clutch)
 
 Certains actionneurs de barre, en particulier les plus puissants, utilisent un embrayage commandé électriquement. C’est souvent une électrovanne avec les systèmes hydrauliques ou un embrayage mécanique commandé par un solénoïde pour les autres actionneurs. Les contrôleurs de moteur de puissance moyenne et élevée ont tous deux une borne de sortie CLUTCH (à l’extrême gauche). Celle-ci fournit une polarité négative (-) lorsque le pilote est activé ou commandé manuellement pour se déplacer. Le fil (+) de l’embrayage est à raccorder à la borne d’alimentation + du contrôleur qui se trouve juste à côté de la sortie d'embrayage.
 
@@ -117,7 +117,7 @@ Le fait que pypilot contrôle la sortie CLUTCH négative (-) permet d’utiliser
 
 ![rudder feedback](img/rudder_feedback.jpg)
 
-Tout d'abord, le capteur d’angle de barre est facultatif. Il peut être déconnecté en cours de route et pypilot continuera à piloter. Il est généralement utilisé pour signaler l'angle du gouvernail sur un indicateur ou pour arrêter le moteur en fin de course. Il peut également être utilisé par certains algorithmes de pilotage pour améliorer la direction, mais l'algorithme de pilotage « basic » ne l'exige pas. Pour être clair, les corrections nécessaires dans des conditions modérées sont au minimum 10 fois supérieures aux erreurs consécutives à la non connaissance de la position de la barre. L'amélioration potentielle des performances de pilotage grâce au capteur d’angle de barre n'est pas énorme. Il faut aussi toujours se rappeler qu’utiliser le capteur d’angle de barre pour limiter la course de l’actionneur risque de neutraliser le pilote automatique si la tige de liaison à la mèche est malencontreusement tordue ou déconnectée. Des contacts de fins de course bien installés ou un bon réglage de la limitation d’intensité seront souvent plus surs pour limiter les efforts sur le système de barre.
+Tout d'abord, le capteur d’angle de barre est facultatif. Il peut être déconnecté en cours de route et pypilot continuera à piloter. Il est généralement utilisé pour signaler l'angle du gouvernail sur un indicateur ou pour arrêter le moteur en fin de course. Il peut également être utilisé par certains algorithmes de pilotage pour améliorer la direction, mais l'algorithme de pilotage « basic » ne l'exige pas. Pour être clair, les corrections nécessaires dans des conditions modérées sont au minimum 10 fois supérieures aux erreurs consécutives à la non connaissance de la position de la barre. L'amélioration potentielle des performances de pilotage grâce au capteur d’angle de barre n'est pas énorme. Il faut aussi toujours se rappeler qu’utiliser le capteur d’angle de barre pour limiter la course de l’actionneur risque de neutraliser le pilote automatique si la tige de liaison à la mèche est malencontreusement tordue ou déconnectée. Des contacts de fins de course bien installés ou un bon réglage de la limitation d’intensité seront souvent plus sûrs pour limiter les efforts sur le système de barre.
 
 Le capteur d’angle de barre doit être électriquement raccordé au contrôleur de l’actionneur. En effet, il produit une tension analogique (mesure) avec l'angle du gouvernail. Si vous disposez déjà d'un capteur de barre existant, vous pouvez le réutiliser en toute sécurité, mais sachez que la plage de résistance électrique acceptable est de 1 KΩ à 100 kΩ. Le capteur de barre de la boutique pypilot est entièrement étanche et utilise non pas un potentiomètre, mais un aimant et un capteur angulaire à effet Hall pour fournir une tension variant avec l'angle, évitant ainsi les problèmes d'usure des potentiomètres.
 
@@ -153,7 +153,7 @@ Au fil du temps, les contacts électriques peuvent se desserrer en raison des ch
 
 Les actionneurs linéaires utilisés pour déplacer le gouvernail doivent être stockés à l'abri des intempéries lorsqu'ils ne sont pas utilisés pour prolonger leur durée de vie. Évitez de les stocker dans des zones du bateau qui peuvent devenir très chaudes et humides, comme des compartiments entièrement fermés, car cela peut augmenter considérablement la corrosion. Il est préférable de les stocker à l’intérieur et de maintenir le bateau ventilé, de même pour l'électronique.
 
-Pour le clavier radio à piles, il est suggéré d’enlever les piles si le bateau doit rester très longtemps inutilisé.
+Pour le clavier radio à piles, il est recommandé d’enlever les piles si le bateau doit rester très longtemps inutilisé.
 
 ## Installation mécanique
 
@@ -178,8 +178,6 @@ Les rapports de démultiplication généralement utilisés sont compris entre 4:
 Une autre option est un moteur de direction assistée de voiture électrique. Ces moteurs sont plusieurs fois plus puissants qu'un moteur d'essuie-glace, très durables et efficaces
 
 #### Direction hydraulique
-
-![hydraulic ram](img/hydraulic_myth1.jpg)
 
 Il existe de nombreux schémas hydrauliques différents pour les bateaux selon qu'il y a une ou plusieurs barres à roue. Globalement, tous les systèmes hydrauliques peuvent être utilisés avec pypilot si une pompe hydraulique électrique est utilisée pour déplacer le gouvernail. Si vous n'êtes pas sûr de la taille de la pompe, la plus grande est recommandée à la fois pour la longévité (moins de chaleur) et la vitesse de barre. Une pompe plus puissante permet d’économiser de l'énergie en permettant des corrections plus rapides.
 
@@ -218,8 +216,6 @@ Les télécommandes peuvent être configurées à l'aide d'un navigateur Web, vo
 Toutes les télécommandes radio 433 MHz à code EV1527, dites à code tournant, couramment utilisés pour les portes de garage, peuvent être utilisées avec le calculateur pypilot. Quelques-unes sont étanches. On les trouve moins cher sur internet que le prix de la pile de rechange. L’utilisation d’une protection 3D facilite leur utilisation sans erreurs et améliore également leur flottabilité si un faible taux de remplissage est utilisé. .
 
 ![white remote](img/white_remote.jpg)
-![jm remote1](img/jm_remote1.jpg)
-![jm remote2](img/jm_remote2.jpg)
 ![jm remote3](img/jm_remote3.png)
 
 #### Clavier radio à 7 touches alimenté en 12-24V
@@ -245,16 +241,17 @@ Ce manuel suppose l'utilisation d'un Raspberry pi zéro exécutant exclusivement
 
 Avant d’engager pypilot pour piloter automatiquement son bateau, il faut d’abord réaliser au minimum les opérations suivantes dans l’ordre indiqué :
 
-- Etalonnage des accéléromètres, c’est déjà fait sur les calculateurs provenant de la boutique. Un nouvel étalonnage est recommandé après chaque changement d’image de la carte SD. Calculateur démonté, l’étalonnage des accéléromètres du calculateur se fait de préférence à terre, sur une surface horizontale comme une table. Voir [étalonnage accéléromètres](#etalonnage-des-accéléromètres).
-- Après installation du calculateur sur le bateau et avec le bateau bien horizontal et stable, il faut indiquer au calculateur que le bateau est de nivea. Voir [initialisation capteurs inertiels](#initialisation-des-capteurs-inertiels-avec-le-bateau-de-niveau).
-- Etalonnage du compas magnétique en faisant tourner le bateau en mer. Voir [étalonnage compas](#etalonnage-du-compas-magnétique)
+- Etalonnage des accéléromètres, c’est déjà fait sur les calculateurs provenant de la boutique. Un nouvel étalonnage est recommandé après chaque changement d’image de la carte SD. Calculateur démonté, l’étalonnage des accéléromètres du calculateur se fait de préférence à terre, sur une surface horizontale comme une table. Voir [étalonnage accéléromètres](#etalonnage-des-accelerometres).
+- Après installation du calculateur sur le bateau et avec le bateau bien horizontal et stable, il faut indiquer au calculateur que le bateau est de niveau. Voir [initialisation capteurs inertiels](#initialisation-des-capteurs-inertiels-avec-le-bateau-de-niveau).
+- Vérification du sens de rotation du moteur (inverser les deux fils du moteur si nécessaire).
+- Etalonnage du compas magnétique en faisant tourner le bateau en mer. Voir [étalonnage compas](#etalonnage-du-compas-magnetique)
 - Alignement du compas de pypilot avec le compas magnétique en introduisant si nécessaire un décalage.
 - Vérification qu’aucun objet magnétique mobile du bord ne perturbe le compas du calculateur
 
-En plus, il faut aussi veiller à mettre en service une méthode de limitation de la course du moteur :
+En plus, si on a pas installé de fins de course du moteur (contacts ou détecteur de proximité), il faut aussi mettre en service une autre méthode de limitation de la course du moteur  :
 
-- Avec un pilote de barre : il faut ajuster la limitation d’intensité du moteur avec le paramètre servo.max_current pour que le moteur ne force pas anormalement en fin de course. Voir [servo.max_current](#servo.max_current).
-- Avec un capteur d’angle de barre : il faut étalonner celui-ci et le régler pour que le drive ne force pas sur le gouvernail. Voir [étalonnage capteur d'angle de barre](#etalonnage-du-capteur-d’angle-de-barre)
+- Avec un pilote de barre : il faut ajuster la limitation d’intensité du moteur avec le paramètre servo.max_current pour que le moteur ne force pas anormalement en fin de course. Voir [servo.max_current](#parametres-du-controleur-moteur).
+- Avec un capteur d’angle de barre : il faut étalonner celui-ci et le régler pour que le drive ne force pas sur le gouvernail. Voir [étalonnage capteur d'angle de barre](#etalonnage-du-capteur-de-barre)
 
 ## Mise sous tension et arrêt
 
@@ -264,23 +261,33 @@ En plus, il faut aussi veiller à mettre en service une méthode de limitation d
 
 L'écran d'accueil s' affiche 10 à 15 secondes après la mise sous tension. Il indique la version du pypilot et peut être utile pour le débogage du système.
 
+### Ecran du calculateur
+
+![pypilot standby](img/pypilot_lcd_standby.png)
+![pypilot engaged](img/pypilot_lcd_engaged.png)
+
+Le calculateur pypilot dispose d'un module LCD du type COG, visible à la lumière du jour et rétroéclairé la nuit. Ce LCD affiche du haut versle bas :
+
+- Le cap du bateau
+- Standby ou la consigne si pilote engagé ou un éventuel message d'erreur
+- le [mode](#modes-de-tenue-du-cap) utilisé est indiqué dans un cadre, ici C pour compas
+- une lettre P majuscule suivie des 2 premières lettres du nom du [profil](#profils) de réglages utilisé, ici "de" pour "default"
+- en bas à droite, un point clignote quand le programme communique avec le pypilot du pilote automatique.
+
 ### LED sur le contrôleur moteur
 
 Lorsque l'alimentation est appliquée au contrôleur de moteur, une LED rouge doit s'allumer pour indiquer l'alimentation. Il y a une LED verte et jaune qui indiquent que les données sont reçues et transmises et qui clignotent généralement chaque fois qu'il communique avec le calculateur du pilote automatique. Enfin, une LED blanche ou bleue indique que le contrôleur est engagé et commande le moteur. Si seule la rouge apparaît, il y a un problème de communication. Si la jaune ou verte reste allumé en permanence, il y a probablement une connexion en court-circuit
 
 ### Mise hors tension
-Les calculateurs pypilot de la boutique sont équipés d’un pi zéro. Ils exécutent une distribution spéciale de Linux appelée tinypilot, basée sur tinycore linux. Après le démarrage, le système fonctionne généralement sans écrire sur la carte SD. Pour cette raison, l'alimentation du calculateur du pilote automatique peut être coupée à tout moment sans trop de risques. Il est possible d'exécuter tinypilot sur différents modèles de Raspberry pi, mais il n'y a pas beaucoup de raison d'utiliser un Pi plus gros car tinypilot est dédié à l'exécution de pypilot exclusivement et la puissance de calcul est suffisante.
+Les calculateurs pypilot de la boutique sont équipés d’un pi zéro. Ils exécutent une distribution spéciale de Linux appelée tinypilot, basée sur  linux. Après le démarrage, le système fonctionne généralement sans écrire sur la carte SD. Pour cette raison, l'alimentation du calculateur du pilote automatique peut être coupée à tout moment sans trop de risques. Il est possible d'exécuter tinypilot sur différents modèles de Raspberry pi, mais il n'y a pas beaucoup de raison d'utiliser un Pi plus gros car tinypilot est dédié à l'exécution de pypilot exclusivement et la puissance de calcul est suffisante.
 
 Pour les systèmes exécutant openplotter ou d'autres distributions, il peut être conseillé de s'arrêter de manière contrôlée, le système ne démarrera généralement pas si la partition de démarrage est corrompue, ce qui n'est généralement pas monté, c'est donc rarement un problème même dans ce cas de perte de puissance, mais il est possible d'avoir un commutateur qui arrête proprement le raspberry. Pour une fiabilité ultime, vous pouvez garder une carte SD de rechange prête à démarrer
 
 ## Interface de contrôle du pilote avec le menu LCD
 
+### Entrée dans le menu LCD
 
-Le calculateur pypilot dispose d'un module LCD du type COG, visible à la lumière du jour. Pilote désactivé, le LCD affiche normalement le cap magnétique du bateau. Pilote activé, le LCD affiche en plus la consigne de cap et en-dessous, le mode utilisé (C pour compas sur les figures ci-contre).
-Pour entrer dans le menu LCD, il faut des touches raccordées au GPIO, une télécommande infrarouge ou un clavier radio avec 7 touches dont les touches Menu et Mode.
-
-![pypilot standby](img/pypilot_lcd_standby.png)
-![pypilot engaged](img/pypilot_lcd_engaged.png)
+Pour entrer dans le menu LCD, il faut des touches raccordées au GPIO, une télécommande infrarouge ou une télécommande (ou clavier radio) avec 7 touches dont les touches Menu et Mode.
 
 Les fonctions des 7 touches diffèrent selon le mode comme indiqué ci-dessous :
 
@@ -321,7 +328,7 @@ Le menu d'étalonnage permet:
 
 En bas de l'écran, des valeurs de tangage et de roulis sont indiquées. Lorsque le niveau a été correctement initialisé, ils doivent être près de zéro lorsque le bateau est horizontal
 
-See [`Calibration Instructions`](#instructions-pour-étalonnage)
+Voir [`instructions pour étalonnage`](#instructions-pour-etalonnage)
 
 ### Paramètres (settings)
 
@@ -490,7 +497,7 @@ Il y a aussi un lien vers le graphique de calibration (utile pour l'étalonnage 
 
 Enfin, le capteur d’angle de barre peut être étalonné en appuyant les boutons appropriés et en indiquant la plage de rotation du gouvernail, voir [étalonnage](#etalonnage-du-capteur-d’angle-de-barre)
 
-Pour avoir plus d’information sur l’étalonnage, voir [instructions pour étalonnage](#instructions-pour-étalonnage)
+Pour avoir plus d’information sur l’étalonnage, voir [instructions pour étalonnage](#instructions-pour-etalonnage)
 
 ### Page web configuration
 
@@ -498,18 +505,18 @@ Pour avoir plus d’information sur l’étalonnage, voir [instructions pour ét
 
 La page web de configuration permet de sélectionner "Clear" ou "Dark" qui n'affecte que l'affichage de l'interface web.
 
-Ensuite, certains paramètres importants peuvent être définis. Ceux-ci sont répartis en 2 listes. Celle au-dessus contient les paramètres globaux s’appliquant à tous les profils, tandis que celle en dessous contient des paramètres qui, comme les gains, concernent uniquement le profil courant. Ces derniers paramètres changent si on change le profil courant. Voir [`Paramètres`](#configuration-des-parametres)
+Ensuite, certains paramètres importants peuvent être définis. Ceux-ci sont répartis en 2 listes. Celle au-dessus contient les paramètres globaux s’appliquant à tous les profils, tandis que celle en dessous contient des paramètres qui, comme les gains, concernent uniquement le profil courant. Ces derniers paramètres changent si on change le profil courant. Voir [configuration des paramètres](#configuration-des-parametres)
 
 
 Au-dessous des paramètres, il y a un lien #pypilot client vers le client pypilot qui permet de visualiser et d'ajuster tous les paramètres possibles.
 
-Viennent ensuite les liens vers [`Configurer le Wifi`](#configurer-le-wifi) and [`Configuration clavier LCD et télécommandes`](#configuration-du-clavier-lcd-et-des-telecommandes)
+Viennent ensuite les liens vers [Configurer le Wifi](#configurer-le-wifi) and [Configuration clavier LCD et télécommandes](#configuration-du-clavier-lcd-et-des-telecommandes)
 
 #### Langue
 
 La langue peut être détectée automatiquement pour le système exécutant le navigateur web, mais cela pourrait être indésirable ou gênant. Vous pouvez configurer manuellement la langue ici.
 
-#### NMEA Client hôte:port
+#### NMEA Client hostport
 
 Certains routeurs ou systèmes NMEA ne peuvent pas se connecter au pypilot, et ont plutôt besoin de pypilot pour se connecter à eux en tant que client. Si c'est le cas, vous pouvez mettre l'adresse hôte ou IP : port à utiliser dans cette case. Normalement, il doit être laissé en blanc en particulier avec OpenCpn et le plugin Pypilot.
 
@@ -528,7 +535,7 @@ Le calculateur du pilote automatique peut être configuré en mode client wifi, 
 
 Il est toutefois rapporté que ce mode n'est pas assez fiable, ce qui signifie que le mode AP-Client n'est probablement bon que pour accéder à l'appareil si le client ne peut pas être trouvé. Il est également possible de revenir au mode AP via l'interface de menu lcd, d'éditer le fichier de mise en réseau sur la carte sd, ou de refaire l’image de la carte SD. Veuillez être conscient des limitations et il est recommandé d'avoir accès à l'interface du menu lcd si le client wifi ne se connecte pas.
 
-Si c'est le cas, connectez-vous, vous souhaiterez peut-être attribuer une adresse IP statique ou accéder à votre routeur pour trouver l'adresse IP attribuée au pilote automatique. Il est généralement possible de découvrir pypilot avec une autre machine sur le même réseau en utilisant également [`pypilot client`](#pypilot-client). Une autre option consiste à exécuter la commande « nmap » pour découvrir l'adresse attribuée. Une liste des clients connectés sera affichée dans un tableau
+Si c'est le cas, connectez-vous, vous souhaiterez peut-être attribuer une adresse IP statique ou accéder à votre routeur pour trouver l'adresse IP attribuée au pilote automatique. Il est généralement possible de découvrir pypilot avec une autre machine sur le même réseau en utilisant également [pypilot client](#pypilot-client). Une autre option consiste à exécuter la commande « nmap » pour découvrir l'adresse attribuée. Une liste des clients connectés sera affichée dans un tableau
 
 ## Configuration du clavier LCD et des télécommandes
 
@@ -542,7 +549,7 @@ Il existe de nombreuses fonctions différentes qui peuvent être attribuées à 
 
 Les claviers radio pypilot utilisent des codes alternatifs (pour une meilleure fiabilité des appuis), de sorte que chaque fonction doit être programmée deux fois, mais ils peuvent généralement être automatiquement programmés s'ils sont détectés.
 
-Les 7 premières fonctions de l’interface sont liées à l'interface du menu lcd. Leur fonction dépend de l'état de l'affichage. Elles sont donc destinées à être utilisées avec une télécommande ou un clavier radio installé en vue de l'écran. Il n'est pas conseillé d’affecter ces fonctions à des télécommandes ne permettant pas à l’utilisateur de voir l’écran. Leurs fonctions sont décrites  [ici](#interface-de-controle-du-pilote-avec-le-menu-lcd)
+Les 7 premières fonctions de l’interface sont liées à l'interface du menu lcd. Leur fonction dépend de l'état de l'affichage. Elles sont donc destinées à être utilisées avec une télécommande ou un clavier radio installé en vue de l'écran. Il n'est pas conseillé d’affecter ces fonctions à des télécommandes ne permettant pas à l’utilisateur de voir l’écran. Leurs fonctions sont décrites  [ici](#entree-dans-le-menu-lcd)
 
 Au-dessous de celles-ci, il existe d'autres fonctions qui peuvent être utilisées sans avoir besoin de voir l'affichage LCD du calculateur et qui devraient être associées aux télécommandes portatives ou les claviers radio installés sur le bateau à distance du calculateur.
 
@@ -558,7 +565,7 @@ Le port IR reçoit des signaux de télécommandes infrarouge. Tant le raspberry 
 
 En plus de l’entrée USB pour échanger des données, le circuit imprimé du calculateur pypilot dispose de bornes à souder pour raccorder un port de données RS422 NMEA0183. C’est ce port qui peut être configuré ici pour activer/désactiver l'entrée et la sortie ainsi que pour régler la vitesse en bauds.
 
-### Remote Mode pour contrôle avec des calculateurs supplémentaires
+### Remote Mode pour commande avec des calculateurs supplémentaires
 
 Il est possible d’utiliser un ou des calculateurs supplémentaires comme afficheur ou unité de contrôle du calculateur principal du pilote automatique. Sur chaque calculateur supplémentaire, il faut cocher la case « Remote Mode » et ajouter l’adresse IP du calculateur du pilote dans le champ de texte contre cette case. Une fois connectés en wifi avec le mode client au calculateur du pilote automatique, ils utilisent alors les données, l’IMU et le récepteur de télécommande du calculateur principal. Un deuxième calculateur pypilot, monté dans un emplacement différent, fournissant l'affichage LCD pourrait également fonctionner comme un pilote automatique de secours en désactivant le « Remote Mode » et en connectant la sortie du contrôleur de moteur à celui-ci si nécessaire.
 
@@ -599,7 +606,7 @@ L’initialisation du capteur inertiel, avec le bateau de niveau, doit être eff
 
 ![compass plot](img/accel_calibration_plot.png)
 
-Assurez-vous que le calculateur est bien installé conformément au # pour que les capteurs magnétiques de l’IMU ne soient pas anormalement perturbés.
+Assurez-vous que le calculateur est bien installé conformément au [instructions de montage](#emplacement-du-calculateur-du-pilote-automatique) pour que les capteurs magnétiques de l’IMU ne soient pas anormalement perturbés.
 
 L'étalonnage du compas magnétique est principalement automatique. Si les accéléromètres et le niveau des capteurs inertiels sont étalonnés, il suffit de naviguer en tournant plus de 240 degrés pour étalonner le compas. Attention si vous utilisez une nouvelle image sur la carte SD, il faudra beaucoup plus de rotations pour annuler la calibration de l’image. Dans ce cas, avant d’installer le calculateur pypilot sur le bateau, il est intéressant de profiter de la calibration des accéléromètres pour ensuite commencer une calibration du compas tant que les points ne font pas un cercle sur la sphère. 
 
@@ -624,27 +631,27 @@ ATTENTION : Le déplacement d’objets métalliques trop près des capteurs du c
 
 Une fois le compas étalonné, un décalage de cap doit être entré en fonction de l'orientation du calculateur par rapport à l’axe du bateau. Sans cette correction, le pilote peut toujours suivre un cap, mais celui affiché ne correspondra pas au cap magnétique du bateau. Aligner le compas permet aussi d’avoir des valeurs de tangage et de roulis correctes. Par exemple, si le décalage de cap est de 90 degrés, les valeurs de tangage et de roulis affichées peuvent être inversées.
 
-### Etalonnage du capteur d’angle de barre
+### Etalonnage du capteur de barre
 
 ![rudder calibration](img/rudder_calibration.png)
 
 Si un capteur d’angle de barre est installé, vous pouvez vérifier la page d'étalonnage du gouvernail pour lire la valeur et vous assurer qu'elle fonctionne. Pour étalonner la barre, vous devez tourner manuellement la barre de bâbord (Port) , à tribord (Starboard), et au centre et en appuyant sur le bouton correspondant pour chaque position. L'ordre n'est pas important. Le calcul du sens du capteur, de l'échelle, du décalage et de la non-linéarité se feront une fois que tous les trois auront été appuyés. Le champ "range" devrait être réglé manuellement pour indiquer l'angle réel à chaque position de plage et limiter le mouvement du pilote automatique au-delà de cette position.
 
-Remarque: Il est possible de régler l’angle de barre à environ 35 degrés, et d'étalonner la barre en la déplaçant à 35 degrés dans chaque direction, puis de changer la « range » à 30 degrés pour limiter la course. Donc, p our être clair, la « plage de gouvernail » est destinée à l'étalonnage, quelle que soit la valeur lorsque le bouton est enfoncé, mais en fonctionnement, elle spécifie l'angle maximal auquel le contrôleur de moteur peut déplacer le gouvernail.
+Remarque: Il est possible de régler l’angle de barre à environ 35 degrés, et d'étalonner la barre en la déplaçant à 35 degrés dans chaque direction, puis de changer la « range » à 30 degrés pour limiter la course. Donc, pour être clair, la « plage de gouvernail » est destinée à l'étalonnage, quelle que soit la valeur lorsque le bouton est enfoncé, mais en fonctionnement, elle spécifie l'angle maximal auquel le contrôleur de moteur peut déplacer le gouvernail.
 
 ## Configuration des paramètres
 
 ### Profils
 
-Pypilot prend en charge différents profils pour modifier rapidement les paramètres qui sont normalement ajustés en fonction des conditions. Ceux-ci incluent tous les gains ainsi que de nombreux paramètres de servo et de virement de bord. L'avantage est que si vous réglez le bateau sur des conditions particulières, vous pouvez créer un profil, puis le modifier à l'avenir lorsque vous naviguez dans les mêmes conditions, mais en mémorisant les paramètres pour une variété de conditions pour améliorer la maniabilité, la consommation d'énergie et même le bruit.
+Pypilot prend en charge différents profils pour modifier rapidement les paramètres qui sont normalement ajustés en fonction des conditions. Ceux-ci incluent tous les gains ainsi que de nombreux paramètres de servo et de virement de bord. L'avantage est que si vous réglez le bateau sur des conditions particulières, vous pouvez créer un profil, puis le modifier à l'avenir lorsque vous naviguez dans les mêmes conditions. Mémoriser différents profils avec des paramètres pour une variété de conditions permet d’améliorer l’efficacité, la consommation d'énergie et même le bruit.
 
 Par exemple, par vent faible, il peut être préférable de réduire le servo.speed_max à moins de 100 % pour réduire le bruit du moteur. Étant donné que la consommation d'énergie est déjà minimale par vent faible, bien que la plupart des variateurs soient globalement moins efficaces en dessous de la vitesse maximale, cela pourrait être un compromis utile pour avoir un pilote automatique silencieux. De même, par mauvais temps, il peut être judicieux de s'assurer que servo.speed_min et servo.speed_max sont à 100 % pour une maniabilité et une consommation d'énergie optimales.
 
 Un autre exemple serait de réduire les gains, en particulier le gain P en naviguant au près, car de nombreux bateaux s'équilibrent naturellement. En effet, lorsque la force exercée par le gréement sur la coque augmente, le bateau tend à lofer avec la gite. Cependant, lorsque le bateau lofe trop, les voiles commencent à "déventer", réduisant leur force sur la coque, ce qui fait abattre le bateau. Pour cette raison, de nombreux bateaux peuvent avoir le gouvernail verrouillé au près et faire une route correcte tout en oscillant autour du cap moyen. Le pilote automatique est généralement bénéfique, en particulier dans les vagues, pour minimiser et amortir cet effet oscillant et améliorer la vitesse globale. Pour cette raison, il est judicieux de prévoir un profil pour le près avec un gain D plus élevé et un gain P plus faible.
 
-### Paramètres du contrôleur de l’actionneur
+### Paramètres du contrôleur moteur
 
-Il existe différents paramètres du contrôleur qui affectent le contrôle et le fonctionnement du pilote automatique. Seuls les trois paramètres des deux premiers sous-paragraphes ci-dessous sont globaux et s'appliquent à tous les profils. Les autres concernent uniquement le profil en cours d'utilisation.
+Il existe différents paramètres du contrôleur qui affectent le contrôle et le fonctionnement du pilote automatique. Seuls les trois paramètres des deux premiers sous-paragraphes ci-dessous sont globaux et s'appliquent à tous les profils. Les autres concernent sont spécifiques au profil en cours d'utilisation.
 
 ####  servo.max_current
 
@@ -707,12 +714,9 @@ Si le bateau met trop de temps pour corriger le cap et passe beaucoup de temps d
 
 #### Conseils
 
-- Au près :  moins de gain de D, plus de gain P (ou PR) 
-
+- Au près :  moins de gain de D, plus de gain P (ou PR)
 - Portant : more D gain, and possibly add DD gain
-
-- Vent faible : moins de gains - économiser l'énergie 
-
+- Vent faible : moins de gains - économiser l'énergie
 - Vent fort : plus de gains - plus de gains nécessaires pour fonctionner correctement
 
 Par mer plate, suivre une route moins droite est une erreur de réglage qui ne fera qu'augmenter la consommation électrique.
@@ -788,22 +792,22 @@ Pypilot prend en charge divers algorithmes de pilotage. Le pilote de base « bas
 ### NMEA0183
 
 Il s'agit de la norme marine la plus universelle et les phrases suivantes peuvent être reçues :
-- MWV - vent apparent et vrai
-- VWR - vent apparent (héritage alternatif)
-- VWT - vent vrai (héritage alternatif)
-- APB - relèvement du pilote automatique pour le suivi de route
-- VWH - vitesse de l'eau
-- LWY - dérive
-- RMC - gps
-- RSA - angle de barre (il est préférable d'utiliser un capteur de gouvernail directement raccordé au contrôleur du moteur)
+- MWV : vent apparent et vrai
+- VWR : vent apparent (héritage alternatif)
+- VWT : vent vrai (héritage alternatif)
+- APB : relèvement du pilote automatique pour le suivi de route
+- VWH : vitesse de l'eau
+- LWY : dérive
+- RMC : gps
+- RSA : angle de barre (il est préférable d'utiliser un capteur de gouvernail directement raccordé au contrôleur du moteur)
 
 Les phrases suivantes peuvent être générées :
-- MWV - after calibrated
-- RSA - rudder angle
-- RMC - if gps filter combines IMU and GPS data this can provide a high speed output for speed/track
-- XDR - pitch and roll
-- HDM - magnetic heading
-- ROT - rotation rate
+- MWV : après calibrage
+- RSA : angle de barree
+- RMC : si le filtre GPS combine les données IMU et GPS, cela peut fournir une sortie à grande vitesse pour la vitesse/la trace 
+- XDR : tangage et roulis
+- HDM : cap magnétique
+- ROT : taux de rotation angulaire
 
 Les connexions nmea0183 se font soit sur des ports série, des ports USB, soit via wifi. Si la connexion est un port série ou un port de communication virtuel, elle sera détectée avec un débit de 4800 ou 38400 bauds. Les phrases reçues via USB/série non utilisées par le pilote automatique seront relayées aux appareils connectés au Wi-Fi.
 
@@ -814,7 +818,7 @@ Il est possible d'établir simplement une connexion à ce port dans un programme
 Il est possible de surveiller les phrases NMEA simplement en utilisant netcat, par exemple : 
 nc 192.168.14.1 20220
 
-Il est également possible de configurer un[nmea client](#nmea-client-hostport).
+Il est également possible de configurer un [nmea client](#nmea-client-hostport).
 
 Normalement, les données reçues via Wi-Fi ne sont pas relayées vers d'autres connexions Wi-Fi, bien qu'il soit possible de contourner cela en envoyant un message $PYPBS*48 à la connexion.
 
@@ -872,7 +876,7 @@ Vous pouvez également récupérer les fichiers journaux à distance en utilisan
 
 ### pypilot Client
 
-Le pypilot_client permet de contrôler l'état et le pilotage automatique à l'aide d'un simple outil de ligne de commande. Cet outil ainsi que d'autres peuvent être installés sur la plupart des distributions Linux en installant les [`python scripts`](#interface-de-controle-du-pilote-par-script-python-sur-un-systeme-linux-distinct).
+Le pypilot_client permet de contrôler l'état et le pilotage automatique à l'aide d'un simple outil de ligne de commande. Cet outil ainsi que d'autres peuvent être installés sur la plupart des distributions Linux en installant les [python scripts](#interface-de-controle-du-pilote-par-script-python-sur-un-systeme-linux-distinct).
 
 Sans paramètres, toutes les valeurs pypilot possibles sont répertoriées.
 
@@ -1066,4 +1070,5 @@ This is a list of possible errors displayed on the LCD screen
 - IMU Failed - les capteurs inertiels sont détectés mais incapables de communiquer
 - IMU waiting on axes - un ou plusieurs des axes des capteurs inertiels ne fonctionnent pas
 - WARNING no motor controller - incapacité à communiquer avec le contrôleur du moteur
+
 
